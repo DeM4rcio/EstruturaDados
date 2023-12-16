@@ -52,7 +52,7 @@ void ImprimirPilha(No *topo)
     printf("\n ----------------PILHA-----------\n");
     while (topo)
     {
-        printf("%*c", &topo->caracter);
+        printf("%c", &topo->caracter);
         topo = topo->proximo;
     }
     printf("\n ----------------PILHA-----------\n");

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct no
 {
@@ -70,10 +71,35 @@ void Imprimir(No *no)
     printf("\n\n");
 }
 
+No* Remover(No **lista, int num)
+{
+    No *aux,*remover = NULL;
+    if(*lista)
+    {
+        if((*lista)->dado == num)
+        {
+            remover = *lista;
+            *lista = remover->proximo;
+        }else
+        {
+            aux = *lista;
+            while(aux->proximo && aux->proximo->dado != num)
+                aux = aux->proximo;
+            if(aux->proximo)
+            {
+                remover = aux->proximo;
+                aux->proximo = remover->proximo;
+            }
+        }
+        
+    }
+    return remover;
+}
+
 int main()
 {
     int opcao, valor, valorRef;
-    No *lista = NULL;
+    No *remover, *lista = NULL;
     do{
     printf("\n0 - Sair\n1 - InserirF \n2 - InserirI\n3 - InserirM\n4 - Imprimir");
         scanf("%d", &opcao);
@@ -98,6 +124,16 @@ int main()
             InserirMeio(&lista, valor, valorRef);
         case 4:
             Imprimir(lista);
+            break;
+        case 5:
+            printf("\nNumero a ser removido: \n");
+            scanf("%d", &valor);
+            remover = Remover(&lista, valor);
+            if(remove)
+            {
+                printf("removido");
+                free(remover);
+            }
             break;
         default:
             if(opcao != 0){
